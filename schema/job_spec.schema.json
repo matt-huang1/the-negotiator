@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MovingJobSpec",
+  "description": "The single source of truth. Built by the Estimator (voice + docs), confirmed by the user, reused VERBATIM on every call.",
+  "type": "object",
+  "required": ["job_id", "vertical", "origin", "destination", "move_date", "inventory", "access", "confirmed_by_user"],
+  "properties": {
+    "job_id": { "type": "string" },
+    "vertical": { "const": "moving" },
+    "origin": {
+      "type": "object",
+      "required": ["postcode", "property_type", "floor", "elevator"],
+      "properties": {
+        "postcode": { "type": "string" },
+        "property_type": { "type": "string", "enum": ["studio", "1bed", "2bed", "3bed", "4bed_plus", "office"] },
+        "floor": { "type": "integer" },
+        "elevator": { "type": "boolean" },
+        "parking_distance_m": { "type": "integer", "description": "walk from truck to door" }
+      }
+    },
+    "destination": { "$ref": "#/properties/origin" },
+    "move_date": { "type": "string", "format": "date" },
+    "date_flexible": { "type": "boolean", "description": "flexibility is negotiation leverage" },
+    "distance_miles": { "type": "number" },
+    "inventory": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["item", "qty"],
+        "properties": {
+          "item": { "type": "string" },
+          "qty": { "type": "integer" },
+          "special": { "type": "string", "description": "piano / artwork / fragile / disassembly-needed" }
+        }
+      }
+    },
+    "services_needed": {
+      "type": "array",
+      "items": { "type": "string", "enum": ["packing", "unpacking", "disassembly", "storage", "insurance"] }
+    },
+    "access": {
+      "type": "object",
+      "properties": { "notes": { "type": "string" } }
+    },
+    "source_documents": {
+      "type": "array",
+      "description": "parsed photos / prior quotes / inventory lists",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": { "type": "string", "enum": ["photo", "prior_quote", "inventory_list"] },
+          "extracted_summary": { "type": "string" }
+        }
+      }
+    },
+    "confirmed_by_user": { "type": "boolean", "description": "MUST be true before any call is placed" }
+  }
+}

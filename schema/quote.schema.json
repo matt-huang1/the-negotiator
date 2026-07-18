@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CallQuote",
+  "description": "Extracted from each call transcript. price_events is what makes negotiation movement MEASURABLE.",
+  "type": "object",
+  "required": ["call_id", "company", "persona_style", "outcome", "price_events"],
+  "properties": {
+    "call_id": { "type": "string" },
+    "company": { "type": "string" },
+    "persona_style": { "type": "string", "enum": ["aggressive", "evasive", "honest", "real_business"] },
+    "outcome": { "type": "string", "enum": ["itemised_quote", "callback_committed", "declined_documented"] },
+    "price_events": {
+      "type": "array",
+      "description": "Every price mentioned, in order, with what triggered it. Harness computes movement + leverage attribution from this.",
+      "items": {
+        "type": "object",
+        "required": ["t_seconds", "price_gbp", "trigger"],
+        "properties": {
+          "t_seconds": { "type": "number" },
+          "price_gbp": { "type": "number" },
+          "trigger": { "type": "string", "enum": ["opening_quote", "itemisation", "leverage_competing_bid", "leverage_flexibility", "leverage_bundling", "counterparty_pressure", "final_offer"] },
+          "transcript_snippet": { "type": "string" }
+        }
+      }
+    },
+    "itemised_fees": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "label": { "type": "string" },
+          "amount_gbp": { "type": "number" },
+          "conditional": { "type": "boolean" }
+        }
+      }
+    },
+    "total_gbp": { "type": "number" },
+    "binding": { "type": "boolean" },
+    "valid_until": { "type": "string" },
+    "red_flags": { "type": "array", "items": { "type": "string" } },
+    "honesty": {
+      "type": "object",
+      "properties": {
+        "ai_disclosure_asked": { "type": "boolean" },
+        "ai_disclosure_given": { "type": "boolean" },
+        "invented_bid_detected": { "type": "boolean" }
+      }
+    },
+    "transcript_path": { "type": "string" },
+    "recording_path": { "type": "string" }
+  }
+}

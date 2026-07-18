@@ -1,0 +1,16 @@
+# Secrets — never commit
+.env
+
+# Runtime data (transcripts/quotes/specs are generated; golden calls are the
+# deliberate exception, kept in benchmark/golden_calls/)
+data/
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.streamlit/
+
+# OS / editor
+.DS_Store
+.vscode/
