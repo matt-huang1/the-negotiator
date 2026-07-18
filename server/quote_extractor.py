@@ -1,4 +1,4 @@
-"""Transcript -> structured CallQuote (quote.schema.json) via Claude.
+"""Transcript -> structured CallQuote (quote.schema.json) via gpt-4o.
 
 Run as a batch step after calls:  python -m server.quote_extractor
 """
@@ -6,7 +6,10 @@ import json
 import os
 from pathlib import Path
 
-import anthropic
+from dotenv import load_dotenv
+from openai import OpenAI
+
+load_dotenv()
 
 DATA = Path(os.getenv("DATA_DIR", "./data"))
 SCHEMA = json.loads((Path(__file__).parent.parent / "schema" / "quote.schema.json").read_text())
@@ -35,16 +38,16 @@ Call metadata (includes whether a real best_quote existed at call time):
 
 
 def extract(call_id: str) -> dict:
-    client = anthropic.Anthropic()
+    client = OpenAI()
     transcript = (DATA / "transcripts" / f"{call_id}.json").read_text()
     metadata = (DATA / "calls" / f"{call_id}.json").read_text()
-    msg = client.messages.create(
-        model="claude-sonnet-4-5",
+    msg = client.chat.completions.create(
+        model="gpt-4o",
         max_tokens=4000,
         messages=[{"role": "user", "content": PROMPT.format(
             schema=json.dumps(SCHEMA), transcript=transcript, metadata=metadata)}],
     )
-    text = msg.content[0].text
+    text = msg.choices[0].message.content
     quote = json.loads(text[text.index("{"): text.rindex("}") + 1])
     quote["call_id"] = call_id
     (DATA / "quotes" / f"{call_id}.json").write_text(json.dumps(quote, indent=2))
