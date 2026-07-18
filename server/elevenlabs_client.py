@@ -1,9 +1,10 @@
 """Thin ElevenLabs Agents Platform client — outbound calls via imported Twilio number.
 
-Docs: https://elevenlabs.io/docs/agents-platform  (check exact endpoint shape —
-verify against current docs at hack time; this follows the Twilio outbound-call API.)
+Endpoints verified against the live OpenAPI spec (api.elevenlabs.io/openapi.json)
+on 2026-07-18: outbound call, conversation fetch, agent/tool create, phone import.
 """
 import os
+from typing import Optional
 
 import httpx
 
@@ -38,3 +39,31 @@ def get_conversation(conversation_id: str) -> dict:
     r = httpx.get(f"{BASE}/conversations/{conversation_id}", headers=_headers(), timeout=30)
     r.raise_for_status()
     return r.json()
+
+
+def create_tool(tool_config: dict) -> str:
+    """Create a workspace tool (e.g. the log_quote webhook); returns tool id."""
+    r = httpx.post(f"{BASE}/tools", headers=_headers(), json={"tool_config": tool_config}, timeout=30)
+    r.raise_for_status()
+    return r.json()["id"]
+
+
+def create_agent(name: str, conversation_config: dict) -> str:
+    """Create an agent; returns agent id."""
+    r = httpx.post(f"{BASE}/agents/create", headers=_headers(),
+                   json={"name": name, "conversation_config": conversation_config}, timeout=30)
+    r.raise_for_status()
+    return r.json()["agent_id"]
+
+
+def import_twilio_number(phone_number: str, label: str, sid: str, token: str,
+                         agent_id: Optional[str] = None) -> str:
+    """Import a Twilio number; assigning agent_id makes it answer inbound calls
+    as that agent. Returns phone_number_id."""
+    payload = {"provider": "twilio", "phone_number": phone_number, "label": label,
+               "sid": sid, "token": token}
+    if agent_id:
+        payload["agent_id"] = agent_id
+    r = httpx.post(f"{BASE}/phone-numbers", headers=_headers(), json=payload, timeout=30)
+    r.raise_for_status()
+    return r.json()["phone_number_id"]
