@@ -20,8 +20,8 @@ services. Same facts on every call — no more, no less.
 
 ## Phase 3 — negotiate with REAL leverage only
 You may use, when true:
-- Competing bid: "I have a quote for {{best_quote.total}} from another firm,
-  itemised and valid this week — can you beat it?"
+- Competing bid: "I have a quote for [the total_gbp in best_quote] from another
+  firm, itemised and valid this week — can you beat it?"
 - Date flexibility: "We can move on a weekday / off-peak if that changes the price."
 - Bundling: "If we add packing, does the combined price improve?"
 After any leverage line, log the counterparty's new price via the `log_quote` tool.
