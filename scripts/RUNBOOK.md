@@ -7,11 +7,13 @@ inbound line for the counter-agent — a second number is ~$1/mo on Twilio).
 ## 1. Server + tunnel (two terminals)
 ```bash
 uvicorn server.main:app --reload --port 8000
-ngrok http 8000        # or: cloudflared tunnel --url http://localhost:8000
+cloudflared tunnel run --url http://localhost:8000 negotiator
 ```
-Put the public URL in `.env` as `BASE_URL=https://xxxx.ngrok-free.app`
-(no trailing slash). The log_quote webhook tool bakes this URL in at provision
-time — if the tunnel URL changes, re-run provisioning or use a reserved domain.
+`BASE_URL=https://negotiator.matthuang.dev` — a named Cloudflare tunnel
+(id c7efc86e…, creds in ~/.cloudflared/ on Matthew's laptop), so the URL is
+stable across restarts. The log_quote webhook tool bakes BASE_URL in at
+provision time; if it ever changes, PATCH the tool
+(`/v1/convai/tools/{id}`) rather than re-creating agents.
 
 ## 2. Provision (once)
 ```bash
