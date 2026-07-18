@@ -5,13 +5,14 @@ Run: uvicorn server.main:app --reload --port 8000
 """
 import json
 import os
+import time
 import uuid
 from pathlib import Path
 
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException, Request
 
-from server.elevenlabs_client import start_outbound_call
+from server.elevenlabs_client import get_conversation, start_outbound_call
 
 load_dotenv()
 DATA = Path(os.getenv("DATA_DIR", "./data"))
@@ -72,7 +73,7 @@ async def start_call(job_id: str, persona: str):
         },
     )
     _save("calls", call_id, {"call_id": call_id, "job_id": job_id, "persona": persona,
-                             "elevenlabs": result, "price_events": []})
+                             "started_at": time.time(), "elevenlabs": result, "price_events": []})
     return {"call_id": call_id, **result}
 
 
@@ -81,6 +82,7 @@ async def log_quote_event(call_id: str, request: Request):
     """Webhook target for the Caller agent's log_quote tool (mid-call)."""
     event = await request.json()
     call = _load("calls", call_id)
+    event.setdefault("t_seconds", round(time.time() - call.get("started_at", time.time()), 1))
     call["price_events"].append(event)
     _save("calls", call_id, call)
     return {"ok": True, "events": len(call["price_events"])}
@@ -93,6 +95,26 @@ async def save_transcript(call_id: str, request: Request):
     (DATA / "transcripts" / f"{call_id}.json").write_text(json.dumps(body, indent=2))
     # TODO: trigger quote_extractor here (or run it as a batch step)
     return {"ok": True}
+
+
+@app.post("/calls/{call_id}/sync_transcript")
+async def sync_transcript(call_id: str):
+    """Pull the transcript from ElevenLabs and save it (poll until status=done).
+
+    Simpler than the workspace-level post-call webhook: no dashboard config,
+    works the moment the call ends.
+    """
+    call = _load("calls", call_id)
+    conversation_id = call.get("elevenlabs", {}).get("conversation_id")
+    if not conversation_id:
+        raise HTTPException(400, "No conversation_id stored for this call")
+    convo = get_conversation(conversation_id)
+    status = convo.get("status")
+    if status not in ("done", "failed"):
+        return {"ok": False, "status": status, "hint": "call still in progress — retry shortly"}
+    (DATA / "transcripts" / f"{call_id}.json").write_text(json.dumps(convo, indent=2))
+    return {"ok": True, "status": status, "turns": len(convo.get("transcript", [])),
+            "path": f"data/transcripts/{call_id}.json"}
 
 
 @app.get("/jobs/{job_id}/quotes")

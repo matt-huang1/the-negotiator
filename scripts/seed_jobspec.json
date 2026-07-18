@@ -1,0 +1,19 @@
+{
+  "vertical": "moving",
+  "origin": {"postcode": "N1 7AA", "property_type": "2bed", "floor": 2, "elevator": false, "parking_distance_m": 20},
+  "destination": {"postcode": "SW11 3RX", "property_type": "2bed", "floor": 0, "elevator": false, "parking_distance_m": 5},
+  "move_date": "2026-08-01",
+  "date_flexible": true,
+  "distance_miles": 8,
+  "inventory": [
+    {"item": "bed (double)", "qty": 2, "special": "disassembly-needed"},
+    {"item": "sofa (3-seat)", "qty": 1},
+    {"item": "wardrobe", "qty": 2, "special": "disassembly-needed"},
+    {"item": "dining table + chairs", "qty": 1},
+    {"item": "boxes", "qty": 35},
+    {"item": "upright piano", "qty": 1, "special": "piano"}
+  ],
+  "services_needed": ["disassembly", "insurance"],
+  "access": {"notes": "No lift at origin (2nd floor). Permit parking at destination, bay reservable."},
+  "confirmed_by_user": true
+}
