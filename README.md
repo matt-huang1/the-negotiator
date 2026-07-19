@@ -39,6 +39,21 @@ ElevenLabs side (dashboard):
    Twilio number (or test in-platform first, phone later).
 3. Import your Twilio number under Phone Numbers, note `ELEVENLABS_PHONE_NUMBER_ID`.
 
+## Telephony fallback (disclosed)
+Real Twilio calls are blocked for this account: Twilio requires a **Business**
+Primary Customer Profile (Trust Hub) to call +1 numbers from accounts created
+outside the US/Canada after Oct 2025 — error 21216 on every +1 destination,
+confirmed with direct Twilio API calls independent of ElevenLabs. Approval
+needs a registered business and review time we don't have before the deadline.
+
+Fallback (sanctioned in the brief plan): the REAL Caller agent negotiates
+against the persona counter-agents **in-platform** via ElevenLabs conversation
+simulation (`python -m scripts.simulate_call --job <id> --persona honest`).
+Same prompts, same dynamic variables, same transcript schema — the extractor
+and harness pipeline is identical to the telephony path. The Twilio plumbing
+(number import, outbound endpoint, live log_quote webhook) is built and was
+verified up to Twilio's compliance wall; flipping back is one env change.
+
 ## Demo checklist (maps 1:1 to the judging brief)
 - [ ] Voice intake produces ONE confirmed job_spec, reused verbatim on every call
 - [ ] Live calls vs 3 distinct negotiation styles, itemised comparable quotes

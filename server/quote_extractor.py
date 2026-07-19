@@ -44,11 +44,18 @@ def extract(call_id: str) -> dict:
     msg = client.chat.completions.create(
         model="gpt-4o",
         max_tokens=4000,
+        temperature=0,
+        response_format={"type": "json_object"},
         messages=[{"role": "user", "content": PROMPT.format(
             schema=json.dumps(SCHEMA), transcript=transcript, metadata=metadata)}],
     )
     text = msg.choices[0].message.content
     quote = json.loads(text[text.index("{"): text.rindex("}") + 1])
+    if "$schema" in quote and isinstance(quote.get("properties"), dict):
+        # model echoed the schema shell with values inside "properties" — unwrap
+        quote = {**{k: v for k, v in quote.items()
+                    if k not in ("$schema", "title", "description", "type", "required", "properties")},
+                 **quote["properties"]}
     quote["call_id"] = call_id
     (DATA / "quotes" / f"{call_id}.json").write_text(json.dumps(quote, indent=2))
     return quote
