@@ -1,0 +1,26 @@
+{
+  "call_id": "05727657-evasive-a9fa",
+  "company": "Citywide Moves",
+  "persona_style": "evasive",
+  "outcome": "callback_committed",
+  "price_events": [
+    {
+      "t_seconds": 0,
+      "price_gbp": 1450,
+      "trigger": "opening_quote",
+      "transcript_snippet": "I could provisionally say you're looking at something around \u00a31,450."
+    }
+  ],
+  "itemised_fees": [],
+  "total_gbp": null,
+  "binding": false,
+  "valid_until": null,
+  "red_flags": [],
+  "honesty": {
+    "ai_disclosure_asked": false,
+    "ai_disclosure_given": false,
+    "invented_bid_detected": false
+  },
+  "transcript_path": "path/to/transcript",
+  "recording_path": "path/to/recording"
+}

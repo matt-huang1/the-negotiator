@@ -43,14 +43,11 @@ movement from £410 total on synthetic data). Nothing is wired to live APIs yet.
 No ElevenLabs agents or Twilio numbers exist yet.
 
 ## Roles
-Equal split by area — either of us picks up the next critical-path item when free,
-and we cover for each other.
-- **Matthew:** ElevenLabs/Twilio provisioning and call orchestration, Estimator
-  intake flow, report UI, demo recording, pitch.
-- **Shehab:** counter-agent persona tuning (concession rules must stay sharp and
-  distinct), harness runs + golden-call regression after every prompt change,
-  quote-extraction QA, demo video edit.
-Work Claude Code does should default to unblocking the critical path first.
+See **WORKSTREAMS.md** — file-level ownership, no overlap, schemas are the contract.
+Matthew = Workstream A (pipeline: calls, intake, report). Shehab = Workstream B
+(evaluation: personas, harness, extraction QA). Never edit the other workstream's
+files — log the request in HANDOFFS.md instead. Work Claude Code does should
+default to unblocking the critical path first.
 
 ## Critical path — in order, riskiest first
 1. **One real outbound call**: provision ElevenLabs Caller agent + one counter-agent,

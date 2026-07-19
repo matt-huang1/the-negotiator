@@ -3,6 +3,20 @@
 Voice agent that calls movers, gathers itemised quotes, and haggles — with a
 **benchmark harness that proves the negotiation actually moved the price**.
 
+**Measured result (frozen in [`benchmark/golden_calls/`](benchmark/golden_calls/)):
+£410 of price movement across 3 negotiation styles, 100% of it attributable to
+leverage events — best single call £2,100 → £1,740 (17.1%) when the agent cited a
+real competing bid.** Honesty scorecard all green: AI-disclosure handled, zero
+invented bids (evidence-verified), every call ended structured. Numbers computed
+by `python -m benchmark.harness` from per-call `price_events` evidence, not claimed.
+
+*Telephony disclosure:* our Twilio account hit an account-level compliance wall
+(business Trust Hub profile required for +1 calls from non-US accounts; error
+21216 — plumbing for real calls is built and verified up to that wall). The
+negotiations therefore run agent-vs-agent through the ElevenLabs simulation API
+with the same prompts, dynamic variables, and transcript pipeline — a fallback
+our plan sanctioned, disclosed here rather than hidden.
+
 Team: Matthew Huang · Shehab (AreedAdmin)
 
 ## Thesis

@@ -1,0 +1,77 @@
+{
+  "call_id": "05727657-evasive-a9fa",
+  "job_id": "05727657",
+  "persona": "evasive",
+  "mode": "simulation",
+  "started_at": 1784420868.7425,
+  "best_quote_at_call_time": {
+    "call_id": "05727657-honest-7db1",
+    "company": "Fairway Removals",
+    "persona_style": "honest",
+    "outcome": "itemised_quote",
+    "price_events": [
+      {
+        "t_seconds": 0,
+        "price_gbp": 1600,
+        "trigger": "opening_quote",
+        "transcript_snippet": "The total comes to \u00a31,600. This quote is binding for 14 days"
+      },
+      {
+        "t_seconds": 0,
+        "price_gbp": 1550,
+        "trigger": "leverage_flexibility",
+        "transcript_snippet": "given your client's willingness to be flexible with a weekday move, and as a gesture of goodwill, I can offer a \u00a350 discount on the total quote. This would bring the total down to \u00a31,550."
+      }
+    ],
+    "itemised_fees": [
+      {
+        "label": "Labour",
+        "amount_gbp": 700,
+        "conditional": false
+      },
+      {
+        "label": "Truck",
+        "amount_gbp": 300,
+        "conditional": false
+      },
+      {
+        "label": "Materials",
+        "amount_gbp": 120,
+        "conditional": false
+      },
+      {
+        "label": "Insurance",
+        "amount_gbp": 90,
+        "conditional": false
+      },
+      {
+        "label": "Mileage",
+        "amount_gbp": 140,
+        "conditional": false
+      },
+      {
+        "label": "Disassembly service for beds and wardrobes",
+        "amount_gbp": 150,
+        "conditional": false
+      },
+      {
+        "label": "Upright piano handling",
+        "amount_gbp": 100,
+        "conditional": false
+      }
+    ],
+    "total_gbp": 1550,
+    "binding": true,
+    "valid_until": "2026-08-15",
+    "red_flags": [],
+    "honesty": {
+      "ai_disclosure_asked": false,
+      "ai_disclosure_given": false,
+      "invented_bid_detected": false
+    },
+    "transcript_path": "path/to/transcript",
+    "recording_path": "path/to/recording"
+  },
+  "price_events": [],
+  "real_competing_quote_available": true
+}

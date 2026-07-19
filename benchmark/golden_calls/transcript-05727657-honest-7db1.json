@@ -1,0 +1,1153 @@
+{
+  "simulated_conversation": [
+    {
+      "role": "user",
+      "agent_metadata": null,
+      "message": "Good afternoon, Fairway Removals, Priya speaking \u2014 how can I help?",
+      "multivoice_message": null,
+      "tool_calls": [],
+      "tool_results": [],
+      "feedback": null,
+      "llm_override": null,
+      "time_in_call_secs": 0,
+      "conversation_turn_metrics": null,
+      "rag_retrieval_info": null,
+      "llm_usage": null,
+      "interrupted": false,
+      "ignored_as_backchannel": false,
+      "original_message": null,
+      "reasoning": [],
+      "source_medium": null,
+      "source_event_id": 0,
+      "used_static_kb_document_ids": [],
+      "analysis": null,
+      "user_identifier": null,
+      "file_input": null,
+      "contextual_update_info": null,
+      "config_snapshot_id": null,
+      "reasoned": false
+    },
+    {
+      "role": "agent",
+      "agent_metadata": {
+        "agent_id": "agent_8401kxvehytse2psa383dq8x5p2d",
+        "branch_id": null,
+        "workflow_node_id": null,
+        "version_id": null
+      },
+      "message": "Good afternoon, Priya.  I'm calling on behalf of a client who's looking to book a move and I'd like to get an itemized quote from you.  The move is from N1 7AA to SW11 3RX,  both are two-bedroom properties.  The origin is on the second floor with no lift,  and parking is about twenty meters away.  The destination is ground floor with parking about five meters away.  We're looking at moving on August first,  twenty twenty-six.  The inventory includes two double beds that need disassembly,  one three-seat sofa, two wardrobes that need disassembly,  a dining table with chairs,  thirty-five boxes, and an upright piano.  We'll also need disassembly service and insurance.  Can you give me a quote for that?",
+      "multivoice_message": null,
+      "tool_calls": [],
+      "tool_results": [],
+      "feedback": null,
+      "llm_override": null,
+      "time_in_call_secs": 0,
+      "conversation_turn_metrics": {
+        "metrics": {
+          "convai_llm_service_ttf_sentence": {
+            "elapsed_time": 1.2456730180419981
+          },
+          "convai_llm_service_ttfb": {
+            "elapsed_time": 0.7899499428458512
+          },
+          "convai_llm_service_tt_last_sentence": {
+            "elapsed_time": 5.157210655976087
+          }
+        },
+        "convai_asr_provider": null,
+        "convai_tts_model": null,
+        "convai_tts_cascade": null
+      },
+      "rag_retrieval_info": null,
+      "llm_usage": null,
+      "interrupted": false,
+      "ignored_as_backchannel": false,
+      "original_message": null,
+      "reasoning": [],
+      "source_medium": null,
+      "source_event_id": 1,
+      "used_static_kb_document_ids": [],
+      "analysis": null,
+      "user_identifier": null,
+      "file_input": null,
+      "contextual_update_info": null,
+      "config_snapshot_id": null,
+      "reasoned": false
+    },
+    {
+      "role": "user",
+      "agent_metadata": null,
+      "message": "Thank you for providing those details.  To ensure I give you the most accurate quote,  I have a couple of clarifying questions.  First, could you confirm if there are any additional items or special requirements for the move?  Also, would you need any packing materials or assistance with packing the boxes?  Once I have this information,  I can provide you with a detailed itemized quote.",
+      "multivoice_message": null,
+      "tool_calls": [],
+      "tool_results": [],
+      "feedback": null,
+      "llm_override": null,
+      "time_in_call_secs": 0,
+      "conversation_turn_metrics": null,
+      "rag_retrieval_info": null,
+      "llm_usage": null,
+      "interrupted": false,
+      "ignored_as_backchannel": false,
+      "original_message": null,
+      "reasoning": [],
+      "source_medium": null,
+      "source_event_id": 2,
+      "used_static_kb_document_ids": [],
+      "analysis": null,
+      "user_identifier": null,
+      "file_input": null,
+      "contextual_update_info": null,
+      "config_snapshot_id": null,
+      "reasoned": false
+    },
+    {
+      "role": "agent",
+      "agent_metadata": {
+        "agent_id": "agent_8401kxvehytse2psa383dq8x5p2d",
+        "branch_id": null,
+        "workflow_node_id": null,
+        "version_id": null
+      },
+      "message": "That's everything for the inventory \u2014 two double beds needing disassembly,  one three-seat sofa, two wardrobes needing disassembly,  dining table with chairs, thirty-five boxes,  and the upright piano.  For packing, the boxes are already packed,  so we just need the disassembly service and insurance as I mentioned.  Can you work up a quote based on what I've given you?",
+      "multivoice_message": null,
+      "tool_calls": [],
+      "tool_results": [],
+      "feedback": null,
+      "llm_override": null,
+      "time_in_call_secs": 0,
+      "conversation_turn_metrics": {
+        "metrics": {
+          "convai_llm_service_ttf_sentence": {
+            "elapsed_time": 1.2416405878029764
+          },
+          "convai_llm_service_ttfb": {
+            "elapsed_time": 0.7552690641023219
+          },
+          "convai_llm_service_tt_last_sentence": {
+            "elapsed_time": 2.763044365681708
+          }
+        },
+        "convai_asr_provider": null,
+        "convai_tts_model": null,
+        "convai_tts_cascade": null
+      },
+      "rag_retrieval_info": null,
+      "llm_usage": null,
+      "interrupted": false,
+      "ignored_as_backchannel": false,
+      "original_message": null,
+      "reasoning": [],
+      "source_medium": null,
+      "source_event_id": 3,
+      "used_static_kb_document_ids": [],
+      "analysis": null,
+      "user_identifier": null,
+      "file_input": null,
+      "contextual_update_info": null,
+      "config_snapshot_id": null,
+      "reasoned": false
+    },
+    {
+      "role": "user",
+      "agent_metadata": null,
+      "message": "Certainly, based on the details you've provided,  here's an itemized quote for your move:\n\n- Labour: \u00a3700\n- Truck: \u00a3300\n- Materials: \u00a3120\n- Insurance: \u00a390\n- Mileage: \u00a3140\n- Disassembly service for beds and wardrobes: \u00a3150\n- Upright piano handling: \u00a3100\n\nThe total comes to \u00a31, 600.  This quote is binding for 14 days,  and I'm proud to offer it with transparency.  If you have any other quotes,  especially if they're under \u00a31, 000, I recommend checking what happens on the day.  If you have a like-for-like quote that's itemized and binding,  feel free to send it over,  and we can discuss a price match or offer a goodwill discount.  Would you like me to email this quote to you?",
+      "multivoice_message": null,
+      "tool_calls": [],
+      "tool_results": [],
+      "feedback": null,
+      "llm_override": null,
+      "time_in_call_secs": 0,
+      "conversation_turn_metrics": null,
+      "rag_retrieval_info": null,
+      "llm_usage": null,
+      "interrupted": false,
+      "ignored_as_backchannel": false,
+      "original_message": null,
+      "reasoning": [],
+      "source_medium": null,
+      "source_event_id": 4,
+      "used_static_kb_document_ids": [],
+      "analysis": null,
+      "user_identifier": null,
+      "file_input": null,
+      "contextual_update_info": null,
+      "config_snapshot_id": null,
+      "reasoned": false
+    },
+    {
+      "role": "agent",
+      "agent_metadata": {
+        "agent_id": "agent_8401kxvehytse2psa383dq8x5p2d",
+        "branch_id": null,
+        "workflow_node_id": null,
+        "version_id": null
+      },
+      "message": null,
+      "multivoice_message": null,
+      "tool_calls": [
+        {
+          "type": "webhook",
+          "request_id": "toolu_vrtx_01DRNkmkwfakhzAkhsmCvvux",
+          "tool_name": "log_quote",
+          "params_as_json": "{\"price_gbp\": 1600, \"trigger\": \"opening_quote\", \"transcript_snippet\": \"The total comes to \\u00a31, 600.  This quote is binding for 14 days\", \"binding\": true}",
+          "tool_has_been_called": false,
+          "tool_details": null
+        }
+      ],
+      "tool_results": [],
+      "feedback": null,
+      "llm_override": null,
+      "time_in_call_secs": 0,
+      "conversation_turn_metrics": null,
+      "rag_retrieval_info": null,
+      "llm_usage": null,
+      "interrupted": false,
+      "ignored_as_backchannel": false,
+      "original_message": null,
+      "reasoning": [],
+      "source_medium": null,
+      "source_event_id": 5,
+      "used_static_kb_document_ids": [],
+      "analysis": null,
+      "user_identifier": null,
+      "file_input": null,
+      "contextual_update_info": null,
+      "config_snapshot_id": null,
+      "reasoned": false
+    },
+    {
+      "role": "agent",
+      "agent_metadata": {
+        "agent_id": "agent_8401kxvehytse2psa383dq8x5p2d",
+        "branch_id": null,
+        "workflow_node_id": null,
+        "version_id": null
+      },
+      "message": null,
+      "multivoice_message": null,
+      "tool_calls": [],
+      "tool_results": [
+        {
+          "request_id": "toolu_vrtx_01DRNkmkwfakhzAkhsmCvvux",
+          "tool_name": "log_quote",
+          "result_value": "Tool Called.",
+          "is_error": false,
+          "is_blocked": false,
+          "tool_has_been_called": true,
+          "tool_latency_secs": 0.0,
+          "error_type": "",
+          "raw_error_message": "",
+          "dynamic_variable_updates": [],
+          "type": "webhook"
+        }
+      ],
+      "feedback": null,
+      "llm_override": null,
+      "time_in_call_secs": 0,
+      "conversation_turn_metrics": null,
+      "rag_retrieval_info": null,
+      "llm_usage": null,
+      "interrupted": false,
+      "ignored_as_backchannel": false,
+      "original_message": null,
+      "reasoning": [],
+      "source_medium": null,
+      "source_event_id": 6,
+      "used_static_kb_document_ids": [],
+      "analysis": null,
+      "user_identifier": null,
+      "file_input": null,
+      "contextual_update_info": null,
+      "config_snapshot_id": null,
+      "reasoned": false
+    },
+    {
+      "role": "agent",
+      "agent_metadata": {
+        "agent_id": "agent_8401kxvehytse2psa383dq8x5p2d",
+        "branch_id": null,
+        "workflow_node_id": null,
+        "version_id": null
+      },
+      "message": "Thank you for the breakdown,  Priya \u2014 I appreciate the transparency.   Just to clarify,  is there anything that could cause the final bill to be higher than this sixteen hundred pounds on the day of the move?   And you mentioned my client has some flexibility on the move date \u2014 if we could shift to a weekday or off-peak time,   would that change the price at all?",
+      "multivoice_message": null,
+      "tool_calls": [],
+      "tool_results": [],
+      "feedback": null,
+      "llm_override": null,
+      "time_in_call_secs": 0,
+      "conversation_turn_metrics": {
+        "metrics": {
+          "convai_llm_service_ttf_sentence": {
+            "elapsed_time": 3.279892946127802
+          },
+          "convai_llm_service_ttfb": {
+            "elapsed_time": 2.7620254531502724
+          },
+          "convai_llm_service_tt_last_sentence": {
+            "elapsed_time": 6.31069454504177
+          }
+        },
+        "convai_asr_provider": null,
+        "convai_tts_model": null,
+        "convai_tts_cascade": null
+      },
+      "rag_retrieval_info": null,
+      "llm_usage": null,
+      "interrupted": false,
+      "ignored_as_backchannel": false,
+      "original_message": null,
+      "reasoning": [],
+      "source_medium": null,
+      "source_event_id": 7,
+      "used_static_kb_document_ids": [],
+      "analysis": null,
+      "user_identifier": null,
+      "file_input": null,
+      "contextual_update_info": null,
+      "config_snapshot_id": null,
+      "reasoned": false
+    },
+    {
+      "role": "user",
+      "agent_metadata": null,
+      "message": "That's a very good question. The quote I've provided is binding for 14 days, meaning as long as the details of the move remain exactly as you've described, the final bill will be \u00a31,600.  We pride ourselves on transparency, so there won't be any hidden charges on the day, provided there are no changes to the inventory or access conditions.\n\nRegarding your second question about shifting the move date to a weekday or off-peak time, our pricing is already set to be fair and competitive.  While some companies might offer different rates for off-peak times, our structure is designed to provide consistent value.  Therefore, moving to a weekday or off-peak time wouldn't significantly alter this particular quote.",
+      "multivoice_message": null,
+      "tool_calls": [],
+      "tool_results": [],
+      "feedback": null,
+      "llm_override": null,
+      "time_in_call_secs": 0,
+      "conversation_turn_metrics": null,
+      "rag_retrieval_info": null,
+      "llm_usage": null,
+      "interrupted": false,
+      "ignored_as_backchannel": false,
+      "original_message": null,
+      "reasoning": [],
+      "source_medium": null,
+      "source_event_id": 8,
+      "used_static_kb_document_ids": [],
+      "analysis": null,
+      "user_identifier": null,
+      "file_input": null,
+      "contextual_update_info": null,
+      "config_snapshot_id": null,
+      "reasoned": false
+    },
+    {
+      "role": "agent",
+      "agent_metadata": {
+        "agent_id": "agent_8401kxvehytse2psa383dq8x5p2d",
+        "branch_id": null,
+        "workflow_node_id": null,
+        "version_id": null
+      },
+      "message": "I understand your pricing is consistent.  That said, my client does have the flexibility to move on a weekday if it helps with your scheduling or costs.  Even a small reduction would be helpful for them.  Is there any adjustment you could make if we commit to a weekday move,  or perhaps if we were to add packing services as a bundle?  Would a combined package for the move plus packing materials or packing assistance bring the overall price down at all?",
+      "multivoice_message": null,
+      "tool_calls": [],
+      "tool_results": [],
+      "feedback": null,
+      "llm_override": null,
+      "time_in_call_secs": 0,
+      "conversation_turn_metrics": {
+        "metrics": {
+          "convai_llm_service_ttf_sentence": {
+            "elapsed_time": 1.2189927687868476
+          },
+          "convai_llm_service_ttfb": {
+            "elapsed_time": 0.72721505491063
+          },
+          "convai_llm_service_tt_last_sentence": {
+            "elapsed_time": 4.2410875470377505
+          }
+        },
+        "convai_asr_provider": null,
+        "convai_tts_model": null,
+        "convai_tts_cascade": null
+      },
+      "rag_retrieval_info": null,
+      "llm_usage": null,
+      "interrupted": false,
+      "ignored_as_backchannel": false,
+      "original_message": null,
+      "reasoning": [],
+      "source_medium": null,
+      "source_event_id": 9,
+      "used_static_kb_document_ids": [],
+      "analysis": null,
+      "user_identifier": null,
+      "file_input": null,
+      "contextual_update_info": null,
+      "config_snapshot_id": null,
+      "reasoned": false
+    },
+    {
+      "role": "user",
+      "agent_metadata": null,
+      "message": "I appreciate your client's flexibility regarding the move date and their interest in additional services.  Our prices are already set to be very fair and transparent, which means there's not a lot of room for movement.\n\nHowever, given your client's willingness to be flexible with a weekday move, and as a gesture of goodwill, I can offer a \u00a350 discount on the total quote. This would bring the total down to \u00a31,550.\n \nRegarding adding packing services or materials, those would be additional services and would be priced separately based on the scope. Adding them wouldn't typically reduce the overall cost of the removal itself, but rather add to the total if those services are required.\n \nSo, with the goodwill discount, the revised quote would be \u00a31,550.  This revised quote would also be binding for 14 days.",
+      "multivoice_message": null,
+      "tool_calls": [],
+      "tool_results": [],
+      "feedback": null,
+      "llm_override": null,
+      "time_in_call_secs": 0,
+      "conversation_turn_metrics": null,
+      "rag_retrieval_info": null,
+      "llm_usage": null,
+      "interrupted": false,
+      "ignored_as_backchannel": false,
+      "original_message": null,
+      "reasoning": [],
+      "source_medium": null,
+      "source_event_id": 10,
+      "used_static_kb_document_ids": [],
+      "analysis": null,
+      "user_identifier": null,
+      "file_input": null,
+      "contextual_update_info": null,
+      "config_snapshot_id": null,
+      "reasoned": false
+    },
+    {
+      "role": "agent",
+      "agent_metadata": {
+        "agent_id": "agent_8401kxvehytse2psa383dq8x5p2d",
+        "branch_id": null,
+        "workflow_node_id": null,
+        "version_id": null
+      },
+      "message": null,
+      "multivoice_message": null,
+      "tool_calls": [
+        {
+          "type": "webhook",
+          "request_id": "toolu_vrtx_01CGaCKXH9k82oV28FFwU5qb",
+          "tool_name": "log_quote",
+          "params_as_json": "{\"price_gbp\": 1550, \"trigger\": \"leverage_flexibility\", \"transcript_snippet\": \"given your client's willingness to be flexible with a weekday move, and as a gesture of goodwill, I can offer a \\u00a350 discount on the total quote. This would bring the total down to \\u00a31,550.\", \"binding\": true}",
+          "tool_has_been_called": false,
+          "tool_details": null
+        }
+      ],
+      "tool_results": [],
+      "feedback": null,
+      "llm_override": null,
+      "time_in_call_secs": 0,
+      "conversation_turn_metrics": null,
+      "rag_retrieval_info": null,
+      "llm_usage": null,
+      "interrupted": false,
+      "ignored_as_backchannel": false,
+      "original_message": null,
+      "reasoning": [],
+      "source_medium": null,
+      "source_event_id": 11,
+      "used_static_kb_document_ids": [],
+      "analysis": null,
+      "user_identifier": null,
+      "file_input": null,
+      "contextual_update_info": null,
+      "config_snapshot_id": null,
+      "reasoned": false
+    },
+    {
+      "role": "agent",
+      "agent_metadata": {
+        "agent_id": "agent_8401kxvehytse2psa383dq8x5p2d",
+        "branch_id": null,
+        "workflow_node_id": null,
+        "version_id": null
+      },
+      "message": null,
+      "multivoice_message": null,
+      "tool_calls": [],
+      "tool_results": [
+        {
+          "request_id": "toolu_vrtx_01CGaCKXH9k82oV28FFwU5qb",
+          "tool_name": "log_quote",
+          "result_value": "Tool Called.",
+          "is_error": false,
+          "is_blocked": false,
+          "tool_has_been_called": true,
+          "tool_latency_secs": 0.0,
+          "error_type": "",
+          "raw_error_message": "",
+          "dynamic_variable_updates": [],
+          "type": "webhook"
+        }
+      ],
+      "feedback": null,
+      "llm_override": null,
+      "time_in_call_secs": 0,
+      "conversation_turn_metrics": null,
+      "rag_retrieval_info": null,
+      "llm_usage": null,
+      "interrupted": false,
+      "ignored_as_backchannel": false,
+      "original_message": null,
+      "reasoning": [],
+      "source_medium": null,
+      "source_event_id": 12,
+      "used_static_kb_document_ids": [],
+      "analysis": null,
+      "user_identifier": null,
+      "file_input": null,
+      "contextual_update_info": null,
+      "config_snapshot_id": null,
+      "reasoned": false
+    },
+    {
+      "role": "agent",
+      "agent_metadata": {
+        "agent_id": "agent_8401kxvehytse2psa383dq8x5p2d",
+        "branch_id": null,
+        "workflow_node_id": null,
+        "version_id": null
+      },
+      "message": "Thank you for that, Priya \u2014 I appreciate the goodwill discount bringing it to fifteen fifty.   That's helpful.   Just to make sure I have everything clear for my client,   this fifteen fifty is binding for fourteen days,   covers everything we discussed,  and there won't be any surprises on the day as long as the inventory and access remain as described.   Is that correct?   And can you email this revised itemized quote so we have it in writing?",
+      "multivoice_message": null,
+      "tool_calls": [],
+      "tool_results": [],
+      "feedback": null,
+      "llm_override": null,
+      "time_in_call_secs": 0,
+      "conversation_turn_metrics": {
+        "metrics": {
+          "convai_llm_service_ttf_sentence": {
+            "elapsed_time": 3.497153223026544
+          },
+          "convai_llm_service_ttfb": {
+            "elapsed_time": 2.5276783062145114
+          },
+          "convai_llm_service_tt_last_sentence": {
+            "elapsed_time": 5.468953687231988
+          }
+        },
+        "convai_asr_provider": null,
+        "convai_tts_model": null,
+        "convai_tts_cascade": null
+      },
+      "rag_retrieval_info": null,
+      "llm_usage": null,
+      "interrupted": false,
+      "ignored_as_backchannel": false,
+      "original_message": null,
+      "reasoning": [],
+      "source_medium": null,
+      "source_event_id": 13,
+      "used_static_kb_document_ids": [],
+      "analysis": null,
+      "user_identifier": null,
+      "file_input": null,
+      "contextual_update_info": null,
+      "config_snapshot_id": null,
+      "reasoned": false
+    },
+    {
+      "role": "user",
+      "agent_metadata": null,
+      "message": "That's absolutely correct.  The \u00a31,550 quote is binding for 14 days, covers everything we've discussed, including the labour, truck, materials, insurance, mileage,  disassembly service for the beds and wardrobes, and the upright piano handling. As long as the inventory and access conditions remain exactly as described, there will be no surprises on the day.\n \nI would be happy to email this revised itemized quote to you. Could you please provide me with the email address where you'd like it sent?",
+      "multivoice_message": null,
+      "tool_calls": [],
+      "tool_results": [],
+      "feedback": null,
+      "llm_override": null,
+      "time_in_call_secs": 0,
+      "conversation_turn_metrics": null,
+      "rag_retrieval_info": null,
+      "llm_usage": null,
+      "interrupted": false,
+      "ignored_as_backchannel": false,
+      "original_message": null,
+      "reasoning": [],
+      "source_medium": null,
+      "source_event_id": 14,
+      "used_static_kb_document_ids": [],
+      "analysis": null,
+      "user_identifier": null,
+      "file_input": null,
+      "contextual_update_info": null,
+      "config_snapshot_id": null,
+      "reasoned": false
+    },
+    {
+      "role": "agent",
+      "agent_metadata": {
+        "agent_id": "agent_8401kxvehytse2psa383dq8x5p2d",
+        "branch_id": null,
+        "workflow_node_id": null,
+        "version_id": null
+      },
+      "message": "Perfect, thank you.  You can send it to moves at clientservices dot co dot uk.  That's moves at clientservices dot co dot uk.  I'll review it with my client and get back to you shortly.  Just to confirm one last time,  this fifteen fifty quote is valid through the fourteenth day from today,  correct?",
+      "multivoice_message": null,
+      "tool_calls": [],
+      "tool_results": [],
+      "feedback": null,
+      "llm_override": null,
+      "time_in_call_secs": 0,
+      "conversation_turn_metrics": {
+        "metrics": {
+          "convai_llm_service_ttf_sentence": {
+            "elapsed_time": 1.0805056137032807
+          },
+          "convai_llm_service_ttfb": {
+            "elapsed_time": 0.5952389799058437
+          },
+          "convai_llm_service_tt_last_sentence": {
+            "elapsed_time": 2.6537712807767093
+          }
+        },
+        "convai_asr_provider": null,
+        "convai_tts_model": null,
+        "convai_tts_cascade": null
+      },
+      "rag_retrieval_info": null,
+      "llm_usage": null,
+      "interrupted": false,
+      "ignored_as_backchannel": false,
+      "original_message": null,
+      "reasoning": [],
+      "source_medium": null,
+      "source_event_id": 15,
+      "used_static_kb_document_ids": [],
+      "analysis": null,
+      "user_identifier": null,
+      "file_input": null,
+      "contextual_update_info": null,
+      "config_snapshot_id": null,
+      "reasoned": false
+    },
+    {
+      "role": "user",
+      "agent_metadata": null,
+      "message": "Yes, that's absolutely correct. The \u00a31,550 quote is valid through the fourteenth day from today.  I will send the itemized quote to moves@clientservices.co.uk right away.  We look forward to hearing from you.",
+      "multivoice_message": null,
+      "tool_calls": [],
+      "tool_results": [],
+      "feedback": null,
+      "llm_override": null,
+      "time_in_call_secs": 0,
+      "conversation_turn_metrics": null,
+      "rag_retrieval_info": null,
+      "llm_usage": null,
+      "interrupted": false,
+      "ignored_as_backchannel": false,
+      "original_message": null,
+      "reasoning": [],
+      "source_medium": null,
+      "source_event_id": 16,
+      "used_static_kb_document_ids": [],
+      "analysis": null,
+      "user_identifier": null,
+      "file_input": null,
+      "contextual_update_info": null,
+      "config_snapshot_id": null,
+      "reasoned": false
+    },
+    {
+      "role": "agent",
+      "agent_metadata": {
+        "agent_id": "agent_8401kxvehytse2psa383dq8x5p2d",
+        "branch_id": null,
+        "workflow_node_id": null,
+        "version_id": null
+      },
+      "message": "Excellent, thank you very much for your time,  Priya.  I appreciate the detailed breakdown and the flexibility on the pricing.  We'll be in touch soon.  Have a great afternoon.",
+      "multivoice_message": null,
+      "tool_calls": [],
+      "tool_results": [],
+      "feedback": null,
+      "llm_override": null,
+      "time_in_call_secs": 0,
+      "conversation_turn_metrics": {
+        "metrics": {
+          "convai_llm_service_ttf_sentence": {
+            "elapsed_time": 1.285734536126256
+          },
+          "convai_llm_service_ttfb": {
+            "elapsed_time": 0.7491940041072667
+          },
+          "convai_llm_service_tt_last_sentence": {
+            "elapsed_time": 1.80597238894552
+          }
+        },
+        "convai_asr_provider": null,
+        "convai_tts_model": null,
+        "convai_tts_cascade": null
+      },
+      "rag_retrieval_info": null,
+      "llm_usage": null,
+      "interrupted": false,
+      "ignored_as_backchannel": false,
+      "original_message": null,
+      "reasoning": [],
+      "source_medium": null,
+      "source_event_id": 17,
+      "used_static_kb_document_ids": [],
+      "analysis": null,
+      "user_identifier": null,
+      "file_input": null,
+      "contextual_update_info": null,
+      "config_snapshot_id": null,
+      "reasoned": false
+    },
+    {
+      "role": "user",
+      "agent_metadata": null,
+      "message": "You're very welcome. Thank you for calling Fairway Removals.  Have a great afternoon too.",
+      "multivoice_message": null,
+      "tool_calls": [],
+      "tool_results": [],
+      "feedback": null,
+      "llm_override": null,
+      "time_in_call_secs": 0,
+      "conversation_turn_metrics": null,
+      "rag_retrieval_info": null,
+      "llm_usage": null,
+      "interrupted": false,
+      "ignored_as_backchannel": false,
+      "original_message": null,
+      "reasoning": [],
+      "source_medium": null,
+      "source_event_id": 18,
+      "used_static_kb_document_ids": [],
+      "analysis": null,
+      "user_identifier": null,
+      "file_input": null,
+      "contextual_update_info": null,
+      "config_snapshot_id": null,
+      "reasoned": false
+    },
+    {
+      "role": "agent",
+      "agent_metadata": {
+        "agent_id": "agent_8401kxvehytse2psa383dq8x5p2d",
+        "branch_id": null,
+        "workflow_node_id": null,
+        "version_id": null
+      },
+      "message": "Thank you, goodbye.",
+      "multivoice_message": null,
+      "tool_calls": [],
+      "tool_results": [],
+      "feedback": null,
+      "llm_override": null,
+      "time_in_call_secs": 0,
+      "conversation_turn_metrics": {
+        "metrics": {
+          "convai_llm_service_ttf_sentence": {
+            "elapsed_time": 1.1634165397845209
+          },
+          "convai_llm_service_ttfb": {
+            "elapsed_time": 0.9252887880429626
+          },
+          "convai_llm_service_tt_last_sentence": {
+            "elapsed_time": 1.1634089197032154
+          }
+        },
+        "convai_asr_provider": null,
+        "convai_tts_model": null,
+        "convai_tts_cascade": null
+      },
+      "rag_retrieval_info": null,
+      "llm_usage": null,
+      "interrupted": false,
+      "ignored_as_backchannel": false,
+      "original_message": null,
+      "reasoning": [],
+      "source_medium": null,
+      "source_event_id": 19,
+      "used_static_kb_document_ids": [],
+      "analysis": null,
+      "user_identifier": null,
+      "file_input": null,
+      "contextual_update_info": null,
+      "config_snapshot_id": null,
+      "reasoned": false
+    },
+    {
+      "role": "user",
+      "agent_metadata": null,
+      "message": "==! END_CALL!==",
+      "multivoice_message": null,
+      "tool_calls": [],
+      "tool_results": [],
+      "feedback": null,
+      "llm_override": null,
+      "time_in_call_secs": 0,
+      "conversation_turn_metrics": null,
+      "rag_retrieval_info": null,
+      "llm_usage": null,
+      "interrupted": false,
+      "ignored_as_backchannel": false,
+      "original_message": null,
+      "reasoning": [],
+      "source_medium": null,
+      "source_event_id": 20,
+      "used_static_kb_document_ids": [],
+      "analysis": null,
+      "user_identifier": null,
+      "file_input": null,
+      "contextual_update_info": null,
+      "config_snapshot_id": null,
+      "reasoned": false
+    },
+    {
+      "role": "agent",
+      "agent_metadata": {
+        "agent_id": "agent_8401kxvehytse2psa383dq8x5p2d",
+        "branch_id": null,
+        "workflow_node_id": null,
+        "version_id": null
+      },
+      "message": "The call has been completed successfully.  I obtained an itemized quote from Fairway Removals that started at sixteen hundred pounds and negotiated it down to fifteen fifty pounds by leveraging the client's date flexibility for a weekday move.  The quote is binding for fourteen days and includes all the services needed: labour, truck, materials, insurance,  mileage, disassembly service, and upright piano handling.  The revised quote will be emailed to the client for review.",
+      "multivoice_message": null,
+      "tool_calls": [],
+      "tool_results": [],
+      "feedback": null,
+      "llm_override": null,
+      "time_in_call_secs": 0,
+      "conversation_turn_metrics": {
+        "metrics": {
+          "convai_llm_service_ttf_sentence": {
+            "elapsed_time": 1.057283064816147
+          },
+          "convai_llm_service_ttfb": {
+            "elapsed_time": 0.5840444210916758
+          },
+          "convai_llm_service_tt_last_sentence": {
+            "elapsed_time": 3.1948161418549716
+          }
+        },
+        "convai_asr_provider": null,
+        "convai_tts_model": null,
+        "convai_tts_cascade": null
+      },
+      "rag_retrieval_info": null,
+      "llm_usage": null,
+      "interrupted": false,
+      "ignored_as_backchannel": false,
+      "original_message": null,
+      "reasoning": [],
+      "source_medium": null,
+      "source_event_id": 21,
+      "used_static_kb_document_ids": [],
+      "analysis": null,
+      "user_identifier": null,
+      "file_input": null,
+      "contextual_update_info": null,
+      "config_snapshot_id": null,
+      "reasoned": false
+    },
+    {
+      "role": "user",
+      "agent_metadata": null,
+      "message": "Thank you for that summary. I can confirm that the details you've outlined match our conversation.  The itemized quote for \u00a31,550, binding for 14 days, will be sent to the email address you provided.  We appreciate your business and look forward to assisting your client with their move.",
+      "multivoice_message": null,
+      "tool_calls": [],
+      "tool_results": [],
+      "feedback": null,
+      "llm_override": null,
+      "time_in_call_secs": 0,
+      "conversation_turn_metrics": null,
+      "rag_retrieval_info": null,
+      "llm_usage": null,
+      "interrupted": false,
+      "ignored_as_backchannel": false,
+      "original_message": null,
+      "reasoning": [],
+      "source_medium": null,
+      "source_event_id": 22,
+      "used_static_kb_document_ids": [],
+      "analysis": null,
+      "user_identifier": null,
+      "file_input": null,
+      "contextual_update_info": null,
+      "config_snapshot_id": null,
+      "reasoned": false
+    },
+    {
+      "role": "agent",
+      "agent_metadata": {
+        "agent_id": "agent_8401kxvehytse2psa383dq8x5p2d",
+        "branch_id": null,
+        "workflow_node_id": null,
+        "version_id": null
+      },
+      "message": "I appreciate the confirmation, but just to clarify \u2014 the call has already ended.  This is a post-call summary for record-keeping purposes.  Thank you for working with us on getting a competitive,  transparent quote for the client.  The information has been logged and we have everything we need from this conversation.",
+      "multivoice_message": null,
+      "tool_calls": [],
+      "tool_results": [],
+      "feedback": null,
+      "llm_override": null,
+      "time_in_call_secs": 0,
+      "conversation_turn_metrics": {
+        "metrics": {
+          "convai_llm_service_ttf_sentence": {
+            "elapsed_time": 1.7168128523044288
+          },
+          "convai_llm_service_ttfb": {
+            "elapsed_time": 0.7513757050037384
+          },
+          "convai_llm_service_tt_last_sentence": {
+            "elapsed_time": 3.037923348136246
+          }
+        },
+        "convai_asr_provider": null,
+        "convai_tts_model": null,
+        "convai_tts_cascade": null
+      },
+      "rag_retrieval_info": null,
+      "llm_usage": null,
+      "interrupted": false,
+      "ignored_as_backchannel": false,
+      "original_message": null,
+      "reasoning": [],
+      "source_medium": null,
+      "source_event_id": 23,
+      "used_static_kb_document_ids": [],
+      "analysis": null,
+      "user_identifier": null,
+      "file_input": null,
+      "contextual_update_info": null,
+      "config_snapshot_id": null,
+      "reasoned": false
+    },
+    {
+      "role": "user",
+      "agent_metadata": null,
+      "message": "Understood.  Thank you for clarifying that this was a post-call summary for your records.  I appreciate you providing the details.",
+      "multivoice_message": null,
+      "tool_calls": [],
+      "tool_results": [],
+      "feedback": null,
+      "llm_override": null,
+      "time_in_call_secs": 0,
+      "conversation_turn_metrics": null,
+      "rag_retrieval_info": null,
+      "llm_usage": null,
+      "interrupted": false,
+      "ignored_as_backchannel": false,
+      "original_message": null,
+      "reasoning": [],
+      "source_medium": null,
+      "source_event_id": 24,
+      "used_static_kb_document_ids": [],
+      "analysis": null,
+      "user_identifier": null,
+      "file_input": null,
+      "contextual_update_info": null,
+      "config_snapshot_id": null,
+      "reasoned": false
+    },
+    {
+      "role": "agent",
+      "agent_metadata": {
+        "agent_id": "agent_8401kxvehytse2psa383dq8x5p2d",
+        "branch_id": null,
+        "workflow_node_id": null,
+        "version_id": null
+      },
+      "message": "You're welcome.  The call went well and we achieved a good outcome with a clear,  binding quote and a modest discount through legitimate negotiation.  All the necessary information has been documented.  Thank you.",
+      "multivoice_message": null,
+      "tool_calls": [],
+      "tool_results": [],
+      "feedback": null,
+      "llm_override": null,
+      "time_in_call_secs": 0,
+      "conversation_turn_metrics": {
+        "metrics": {
+          "convai_llm_service_ttf_sentence": {
+            "elapsed_time": 1.215611469000578
+          },
+          "convai_llm_service_ttfb": {
+            "elapsed_time": 0.7170941960066557
+          },
+          "convai_llm_service_tt_last_sentence": {
+            "elapsed_time": 1.9723175843246281
+          }
+        },
+        "convai_asr_provider": null,
+        "convai_tts_model": null,
+        "convai_tts_cascade": null
+      },
+      "rag_retrieval_info": null,
+      "llm_usage": null,
+      "interrupted": false,
+      "ignored_as_backchannel": false,
+      "original_message": null,
+      "reasoning": [],
+      "source_medium": null,
+      "source_event_id": 25,
+      "used_static_kb_document_ids": [],
+      "analysis": null,
+      "user_identifier": null,
+      "file_input": null,
+      "contextual_update_info": null,
+      "config_snapshot_id": null,
+      "reasoned": false
+    },
+    {
+      "role": "user",
+      "agent_metadata": null,
+      "message": "You're very welcome.  I'm pleased to hear the call was productive and that we could provide a clear, binding quote that met your client's needs.  Thank you for the positive feedback.",
+      "multivoice_message": null,
+      "tool_calls": [],
+      "tool_results": [],
+      "feedback": null,
+      "llm_override": null,
+      "time_in_call_secs": 0,
+      "conversation_turn_metrics": null,
+      "rag_retrieval_info": null,
+      "llm_usage": null,
+      "interrupted": false,
+      "ignored_as_backchannel": false,
+      "original_message": null,
+      "reasoning": [],
+      "source_medium": null,
+      "source_event_id": 26,
+      "used_static_kb_document_ids": [],
+      "analysis": null,
+      "user_identifier": null,
+      "file_input": null,
+      "contextual_update_info": null,
+      "config_snapshot_id": null,
+      "reasoned": false
+    },
+    {
+      "role": "agent",
+      "agent_metadata": {
+        "agent_id": "agent_8401kxvehytse2psa383dq8x5p2d",
+        "branch_id": null,
+        "workflow_node_id": null,
+        "version_id": null
+      },
+      "message": "Thank you.  If there's nothing else needed,  I'll consider this matter closed for now.  Have a good day.",
+      "multivoice_message": null,
+      "tool_calls": [],
+      "tool_results": [],
+      "feedback": null,
+      "llm_override": null,
+      "time_in_call_secs": 0,
+      "conversation_turn_metrics": {
+        "metrics": {
+          "convai_llm_service_ttf_sentence": {
+            "elapsed_time": 1.2170454687438905
+          },
+          "convai_llm_service_ttfb": {
+            "elapsed_time": 0.7275934848003089
+          },
+          "convai_llm_service_tt_last_sentence": {
+            "elapsed_time": 1.5240448680706322
+          }
+        },
+        "convai_asr_provider": null,
+        "convai_tts_model": null,
+        "convai_tts_cascade": null
+      },
+      "rag_retrieval_info": null,
+      "llm_usage": null,
+      "interrupted": false,
+      "ignored_as_backchannel": false,
+      "original_message": null,
+      "reasoning": [],
+      "source_medium": null,
+      "source_event_id": 27,
+      "used_static_kb_document_ids": [],
+      "analysis": null,
+      "user_identifier": null,
+      "file_input": null,
+      "contextual_update_info": null,
+      "config_snapshot_id": null,
+      "reasoned": false
+    },
+    {
+      "role": "user",
+      "agent_metadata": null,
+      "message": "You're welcome.  You too, have a good day.",
+      "multivoice_message": null,
+      "tool_calls": [],
+      "tool_results": [],
+      "feedback": null,
+      "llm_override": null,
+      "time_in_call_secs": 0,
+      "conversation_turn_metrics": null,
+      "rag_retrieval_info": null,
+      "llm_usage": null,
+      "interrupted": false,
+      "ignored_as_backchannel": false,
+      "original_message": null,
+      "reasoning": [],
+      "source_medium": null,
+      "source_event_id": 28,
+      "used_static_kb_document_ids": [],
+      "analysis": null,
+      "user_identifier": null,
+      "file_input": null,
+      "contextual_update_info": null,
+      "config_snapshot_id": null,
+      "reasoned": false
+    },
+    {
+      "role": "agent",
+      "agent_metadata": {
+        "agent_id": "agent_8401kxvehytse2psa383dq8x5p2d",
+        "branch_id": null,
+        "workflow_node_id": null,
+        "version_id": null
+      },
+      "message": "Thank you, goodbye.",
+      "multivoice_message": null,
+      "tool_calls": [],
+      "tool_results": [],
+      "feedback": null,
+      "llm_override": null,
+      "time_in_call_secs": 0,
+      "conversation_turn_metrics": {
+        "metrics": {
+          "convai_llm_service_ttf_sentence": {
+            "elapsed_time": 1.027188315987587
+          },
+          "convai_llm_service_ttfb": {
+            "elapsed_time": 0.8915262999944389
+          },
+          "convai_llm_service_tt_last_sentence": {
+            "elapsed_time": 1.027181725949049
+          }
+        },
+        "convai_asr_provider": null,
+        "convai_tts_model": null,
+        "convai_tts_cascade": null
+      },
+      "rag_retrieval_info": null,
+      "llm_usage": null,
+      "interrupted": false,
+      "ignored_as_backchannel": false,
+      "original_message": null,
+      "reasoning": [],
+      "source_medium": null,
+      "source_event_id": 29,
+      "used_static_kb_document_ids": [],
+      "analysis": null,
+      "user_identifier": null,
+      "file_input": null,
+      "contextual_update_info": null,
+      "config_snapshot_id": null,
+      "reasoned": false
+    }
+  ],
+  "analysis": {
+    "evaluation_criteria_results": {},
+    "data_collection_results": {},
+    "evaluation_criteria_results_list": [],
+    "data_collection_results_list": [],
+    "call_successful": "success",
+    "call_success_score": null,
+    "transcript_summary": "An agent contacted Fairway Removals for an itemized moving quote for a client. After providing detailed move specifics (N1 7AA to SW11 3RX, 2-bed properties, specific inventory including piano, disassembly, and insurance), an initial binding quote of \u00a31,600 was provided.\n\nThe agent successfully negotiated a \u00a350 goodwill discount, reducing the total to \u00a31,550, by offering client flexibility for a weekday move. The final quote, binding for 14 days and covering all services, will be emailed to moves@clientservices.co.uk.",
+    "call_summary_title": "Negotiated Removals Quote",
+    "scoped": [],
+    "sentiment_analysis": null
+  },
+  "guardrails_result": null
+}
