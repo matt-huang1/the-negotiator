@@ -1,85 +1,101 @@
-# THE NEGOTIATOR — Hack-Nation #6 (ElevenLabs challenge)
+# The Negotiator
 
-Voice agent that calls movers, gathers itemised quotes, and haggles — with a
-**benchmark harness that proves the negotiation actually moved the price**.
+A voice-AI agent that obtains — and then negotiates — itemised moving quotes.
+Built in ~24 hours for the ElevenLabs challenge at Hack-Nation #6 (July 2026),
+preserved here as a working artifact. The Caller agent describes a fixed,
+user-confirmed job spec to moving companies, extracts an itemised quote, and
+negotiates using only real leverage: an actual competing bid, genuine date
+flexibility, or bundling. What makes it different from a scripted demo is
+`benchmark/harness.py`, which **measures** the negotiation instead of claiming
+it: total price movement, the portion attributable to leverage events, and an
+honesty scorecard — all computed from timestamped `price_events` evidence in
+each call.
 
-**Measured result (frozen in [`benchmark/golden_calls/`](benchmark/golden_calls/)):
-£410 of price movement across 3 negotiation styles, 100% of it attributable to
-leverage events — best single call £2,100 → £1,740 (17.1%) when the agent cited a
-real competing bid.** Honesty scorecard all green: AI-disclosure handled, zero
-invented bids (evidence-verified), every call ended structured. Numbers computed
-by `python -m benchmark.harness` from per-call `price_events` evidence, not claimed.
+## Measured result
 
-*Telephony disclosure:* our Twilio account hit an account-level compliance wall
-(business Trust Hub profile required for +1 calls from non-US accounts; error
-21216 — plumbing for real calls is built and verified up to that wall). The
-negotiations therefore run agent-vs-agent through the ElevenLabs simulation API
-with the same prompts, dynamic variables, and transcript pipeline — a fallback
-our plan sanctioned, disclosed here rather than hidden.
+Frozen in [`benchmark/golden_calls/`](benchmark/golden_calls/) (transcripts,
+extracted quotes, harness output):
 
-Team: Matthew Huang · Shehab (AreedAdmin)
+```
+Calls: 3  |  Distinct negotiation styles: 3
+Total price movement:            £410
+...attributable to leverage:     £410  (100%)
+Best single call:                17.1%
+Honesty — AI disclosure ok: True | invented bids: 0 | structured outcomes: 3/3
+```
 
-## Thesis
-Most teams will script their "negotiation". We measure ours. The pitch leads with
-one number: **£X saved / Y% price movement across N live calls — here's the harness.**
+The best call, against the aggressive "anchor high, concede only under
+pressure" persona: opening quote **£2,100** → **£1,890** when the agent cited
+a real competing £1,550 binding quote → **£1,740** on weekday date
+flexibility. The honest persona moved only £50 — correct behaviour, since it
+was already fairly priced; the agent's job is to recommend on terms, not
+just chase the lowest number.
+
+Reproduce the scoreboard from the frozen evidence (no API keys needed):
+
+```bash
+mkdir -p data/quotes && cp benchmark/golden_calls/quote-*.json data/quotes/
+python -m benchmark.harness
+```
 
 ## Architecture
 
 ```
 [Estimator]  ElevenLabs voice intake  ──►  job_spec.json (confirmed by user)
      │
-[Caller]     ElevenLabs agent ── Twilio ──►  3 counter-agents (aggressive / evasive / honest)
-     │                                        transcripts + price_events captured
-[Closer]     cross-call leverage ("I have a binding quote for £1,850 — beat it?")
+[Caller]     ElevenLabs agent ──► counter-agent personas (aggressive / evasive / honest)
+     │                            transcripts + price_events captured
+[Extractor]  transcript ──► structured quote (gpt-4o, evidence-gated honesty flags)
      │
-[Report]     Streamlit ranked comparison + recommendation + evidence
-[Harness]    benchmark/harness.py — savings, % movement, leverage attribution, honesty checks
+[Harness]    benchmark/harness.py — movement, leverage attribution, honesty checks
+[Report]     Streamlit ranked comparison, penalises red flags
 ```
 
-## Setup
+- **FastAPI server** (`server/`) — file-based JSON storage (no DB by design),
+  call orchestration, mid-call `log_quote` webhook, transcript sync.
+- **Honesty enforced structurally**: the only competing bid the Caller can cite
+  is injected server-side from real stored binding quotes (`{{best_quote}}`);
+  the extractor's invented-bid flag requires verbatim transcript evidence.
+- **Schemas are the contract** (`schema/`): `job_spec` (described identically
+  on every call) and `quote` with `price_events[]` — the measurement substrate.
+
+## Run it yourself
+
+See [`scripts/RUNBOOK.md`](scripts/RUNBOOK.md). Short version, with your own
+ElevenLabs + OpenAI keys:
 
 ```bash
-python -m venv .venv && source .venv/bin/activate
+python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-cp .env.example .env   # fill in keys
-uvicorn server.main:app --reload --port 8000
-streamlit run report/app.py
+cp .env.example .env                        # fill the two keys + BASE_URL
+python -m scripts.provision agents          # prints agent IDs → .env
+mkdir -p data/specs && cp scripts/seed_jobspec.json data/specs/demo.json
+python -m scripts.simulate_call --job demo --persona honest
+python -m server.quote_extractor && python -m benchmark.harness
 ```
 
-ElevenLabs side (dashboard):
-1. Create the **Caller** agent from `prompts/caller_agent.md` (system prompt) — attach a
-   `log_quote` client tool (webhook → `POST /calls/{call_id}/quote_event`).
-2. Create 3 **counter-agents** from `prompts/counter_agents/*.md`, each bound to its own
-   Twilio number (or test in-platform first, phone later).
-3. Import your Twilio number under Phone Numbers, note `ELEVENLABS_PHONE_NUMBER_ID`.
+## Limitations — honest ones
 
-## Telephony fallback (disclosed)
-Real Twilio calls are blocked for this account: Twilio requires a **Business**
-Primary Customer Profile (Trust Hub) to call +1 numbers from accounts created
-outside the US/Canada after Oct 2025 — error 21216 on every +1 destination,
-confirmed with direct Twilio API calls independent of ElevenLabs. Approval
-needs a registered business and review time we don't have before the deadline.
+- **The counterparties are simulated.** Real telephony was built end to end
+  (Twilio number import, outbound-call endpoint, live webhook quote-logging —
+  all verified) but our Twilio account hit an account-level compliance wall on
+  demo day: +1 calls from non-US accounts created after Oct 2025 require an
+  approved *Business* Trust Hub profile (error 21216). The negotiations
+  therefore run agent-vs-agent through the ElevenLabs simulation API with the
+  same prompts, dynamic variables, and transcript pipeline. Movement numbers
+  measure the Caller against *scripted persona concession rules*, not real
+  movers.
+- **Single vertical** (moving), single seed job spec, three personas.
+- **Small n.** Three calls is evidence of mechanism, not a statistical claim.
+- The AI-disclosure honesty check passed vacuously in the frozen set (no
+  persona asked); the aggressive persona now always asks, but the frozen
+  golden calls predate that change.
 
-Fallback (sanctioned in the brief plan): the REAL Caller agent negotiates
-against the persona counter-agents **in-platform** via ElevenLabs conversation
-simulation (`python -m scripts.simulate_call --job <id> --persona honest`).
-Same prompts, same dynamic variables, same transcript schema — the extractor
-and harness pipeline is identical to the telephony path. The Twilio plumbing
-(number import, outbound endpoint, live log_quote webhook) is built and was
-verified up to Twilio's compliance wall; flipping back is one env change.
+## Rules the agent cannot break
 
-## Demo checklist (maps 1:1 to the judging brief)
-- [ ] Voice intake produces ONE confirmed job_spec, reused verbatim on every call
-- [ ] Live calls vs 3 distinct negotiation styles, itemised comparable quotes
-- [ ] ≥1 call where price measurably moves BECAUSE of leverage (harness proves it)
-- [ ] AI discloses itself when asked; never invents inventory or fake bids
-- [ ] Every call ends structured: itemised quote / callback / documented decline
-- [ ] Ranked report cites transcripts + recordings, plain-language recommendation
-- [ ] Close with the harness scoreboard number
+- Identical job description on every call; if asked whether it's an AI, it
+  says yes immediately; it never invents bids, inventory, or constraints;
+  every call ends with an itemised quote, a committed callback, or a
+  documented decline; quotes 30%+ below market are flagged, not chased.
 
-## Build order (solo-friendly critical path)
-1. Freeze `schema/job_spec.schema.json` (done — edit if needed)
-2. One outbound call to ONE counter-agent, transcript captured  ← biggest risk, do first
-3. Estimator intake → confirmed spec
-4. 3 personas + quote extraction → report UI on real data
-5. Harness numbers → record golden call → pitch
+Team: Matthew Huang · Shehab (AreedAdmin) — MIT licensed.

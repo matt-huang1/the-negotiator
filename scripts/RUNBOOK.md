@@ -1,52 +1,38 @@
-# RUNBOOK — first real call, end to end
+# RUNBOOK — running the pipeline
 
-Prereqs: `.env` filled with `ELEVENLABS_API_KEY`, `TWILIO_ACCOUNT_SID`,
-`TWILIO_AUTH_TOKEN`, and TWO Twilio numbers (outbound line for the Caller,
-inbound line for the counter-agent — a second number is ~$1/mo on Twilio).
+Two modes: **simulation** (agent-vs-agent in-platform, no telephony — how the
+frozen results were produced) and **live telephony** (Twilio; requires an
+account that can call your counterparty numbers — see README "Limitations").
 
-## 1. Server + tunnel (two terminals)
+## Simulation mode (works from a clean clone + your own keys)
 ```bash
-uvicorn server.main:app --reload --port 8000
-cloudflared tunnel run --url http://localhost:8000 negotiator
-```
-`BASE_URL=https://negotiator.matthuang.dev` — a named Cloudflare tunnel
-(id c7efc86e…, creds in ~/.cloudflared/ on Matthew's laptop), so the URL is
-stable across restarts. The log_quote webhook tool bakes BASE_URL in at
-provision time; if it ever changes, PATCH the tool
-(`/v1/convai/tools/{id}`) rather than re-creating agents.
-
-## 2. Provision (once)
-```bash
-python -m scripts.provision agents
-# copy the two printed IDs into .env
-python -m scripts.provision phone --number +44XXXX --label caller-outbound
-# copy ELEVENLABS_PHONE_NUMBER_ID into .env
-python -m scripts.provision phone --number +44YYYY --label honest-inbound --assign-honest
-# copy COUNTER_HONEST_NUMBER into .env
-python -m scripts.provision check   # verify everything exists
-```
-Restart uvicorn after editing `.env`.
-
-## 3. One call
-```bash
-curl -s -X POST $BASE_URL/jobspec -H 'content-type: application/json' \
-  -d @scripts/seed_jobspec.json
-# -> {"job_id": "abc12345"}
-
-curl -s -X POST "$BASE_URL/calls/start?job_id=abc12345&persona=honest"
-# -> {"call_id": "abc12345-honest-xxxx", "conversation_id": ...}
-```
-Listen in: ElevenLabs dashboard → Agents → Calls shows the live conversation.
-
-## 4. Transcript + scoreboard
-```bash
-curl -s -X POST $BASE_URL/calls/<call_id>/sync_transcript   # retry until status=done
+python3 -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+cp .env.example .env       # fill ELEVENLABS_API_KEY, OPENAI_API_KEY, BASE_URL
+python -m scripts.provision agents          # creates Caller + honest counter-agent
+# paste the printed agent IDs into .env
+mkdir -p data/specs && cp scripts/seed_jobspec.json data/specs/demo.json
+python -m scripts.simulate_call --job demo --persona honest
 python -m server.quote_extractor
 python -m benchmark.harness
 ```
+`BASE_URL` must be an https URL at provision time (it's baked into the
+`log_quote` webhook tool). In simulation, tools are mocked and the URL is never
+called, so any https URL you control works. If it ever changes, PATCH the tool
+(`/v1/convai/tools/{id}`) rather than re-creating agents.
 
-## Fallback (Twilio blocks us >45 min)
-Skip phone import; in the ElevenLabs dashboard use "Test agent" /
-agent-to-agent simulation, export the transcript JSON into
-`data/transcripts/<call_id>.json` manually, and disclose the fallback in the
-demo. The rest of the pipeline (extractor → harness → report) is unchanged.
+## Live telephony mode
+1. Run the FastAPI server and expose it (`uvicorn server.main:app --port 8000`
+   plus a tunnel, e.g. a named Cloudflare tunnel); set `BASE_URL` to the
+   public URL **before** provisioning.
+2. Import two Twilio numbers (`python -m scripts.provision phone ...` — one
+   outbound line, one `--assign-honest` inbound line) and fill the IDs in `.env`.
+3. Store a confirmed spec via `POST /jobspec`, then
+   `POST /calls/start?job_id=...&persona=honest`.
+4. `POST /calls/<call_id>/sync_transcript` after hang-up, then extractor + harness.
+
+## Reproduce the frozen scoreboard (no keys needed)
+```bash
+mkdir -p data/quotes && cp benchmark/golden_calls/quote-*.json data/quotes/
+python -m benchmark.harness
+```

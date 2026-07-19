@@ -1,11 +1,12 @@
-# THE NEGOTIATOR — Claude Code handoff
+# THE NEGOTIATOR — project context for Claude Code
 
-You are working on our submission to the ElevenLabs "Negotiator" challenge at
-Hack-Nation #6 (6th Global AI Hackathon). Deadline: **Sunday July 19, ~16:30 ET**,
-submitted via projects.hack-nation.ai. Time is the scarcest resource — bias every
-decision toward the critical path below.
+This repo is our completed submission to the ElevenLabs "Negotiator" challenge
+at Hack-Nation #6 (July 2026), now maintained as a portfolio artifact. The
+frozen evidence in `benchmark/golden_calls/` is the point of the repo — treat
+it as read-only. The sections below were the working context during the
+hackathon and remain accurate as project documentation.
 
-## Mission & winning thesis
+## Mission & thesis
 Voice agent that calls moving companies, extracts itemised quotes, and negotiates.
 The brief's decisive judging line: *"at least one negotiation shows the price
 measurably change during the call because of leverage the agent gathered."*
@@ -37,10 +38,12 @@ everything else serves it.
 - `report/app.py` — Streamlit ranked report; ranks on price AND terms, penalises red flags
 - `benchmark/golden_calls/` — frozen best recordings + quotes; regression set after prompt tweaks
 
-## Current state
-Scaffold complete; harness smoke-tested (correctly separated £260 leverage-attributed
-movement from £410 total on synthetic data). Nothing is wired to live APIs yet.
-No ElevenLabs agents or Twilio numbers exist yet.
+## Final state (post-hackathon)
+Pipeline ran end to end via the ElevenLabs simulation API (real telephony was
+built but blocked by a Twilio account-level compliance requirement — see README
+"Limitations"). Measured result: £410 movement across 3 personas, 100%
+leverage-attributed, best call £2,100→£1,740 (17.1%). Frozen in
+benchmark/golden_calls/ with the harness output.
 
 ## Roles
 See **WORKSTREAMS.md** — file-level ownership, no overlap, schemas are the contract.
