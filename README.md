@@ -1,15 +1,13 @@
 # The Negotiator
 
 A voice-AI agent that obtains — and then negotiates — itemised moving quotes.
-Built in ~24 hours for the ElevenLabs challenge at Hack-Nation #6 (July 2026),
-preserved here as a working artifact. The Caller agent describes a fixed,
-user-confirmed job spec to moving companies, extracts an itemised quote, and
-negotiates using only real leverage: an actual competing bid, genuine date
-flexibility, or bundling. What makes it different from a scripted demo is
-`benchmark/harness.py`, which **measures** the negotiation instead of claiming
-it: total price movement, the portion attributable to leverage events, and an
-honesty scorecard — all computed from timestamped `price_events` evidence in
-each call.
+The Caller agent describes a fixed, user-confirmed job spec to moving
+companies, extracts an itemised quote, and negotiates using only real
+leverage: an actual competing bid, genuine date flexibility, or bundling.
+What separates it from a scripted demo is `benchmark/harness.py`, which
+**measures** the negotiation instead of claiming it: total price movement, the
+portion attributable to leverage events, and an honesty scorecard — all
+computed from timestamped `price_events` evidence in each call. Built in 24 hours; preserved as a working artifact.
 
 ## Measured result
 
@@ -28,8 +26,8 @@ The best call, against the aggressive "anchor high, concede only under
 pressure" persona: opening quote **£2,100** → **£1,890** when the agent cited
 a real competing £1,550 binding quote → **£1,740** on weekday date
 flexibility. The honest persona moved only £50 — correct behaviour, since it
-was already fairly priced; the agent's job is to recommend on terms, not
-just chase the lowest number.
+was already fairly priced; the agent's job is to recommend on terms, not just
+chase the lowest number.
 
 Reproduce the scoreboard from the frozen evidence (no API keys needed):
 
@@ -53,9 +51,10 @@ python -m benchmark.harness
 
 - **FastAPI server** (`server/`) — file-based JSON storage (no DB by design),
   call orchestration, mid-call `log_quote` webhook, transcript sync.
-- **Honesty enforced structurally**: the only competing bid the Caller can cite
-  is injected server-side from real stored binding quotes (`{{best_quote}}`);
-  the extractor's invented-bid flag requires verbatim transcript evidence.
+- **Honesty enforced structurally**: the only competing bid the Caller can
+  cite is injected server-side from real stored binding quotes
+  (`{{best_quote}}`); the extractor's invented-bid flag requires verbatim
+  transcript evidence.
 - **Schemas are the contract** (`schema/`): `job_spec` (described identically
   on every call) and `quote` with `price_events[]` — the measurement substrate.
 
@@ -74,28 +73,32 @@ python -m scripts.simulate_call --job demo --persona honest
 python -m server.quote_extractor && python -m benchmark.harness
 ```
 
-## Limitations — honest ones
+## Limitations
 
-- **The counterparties are simulated.** Real telephony was built end to end
-  (Twilio number import, outbound-call endpoint, live webhook quote-logging —
-  all verified) but our Twilio account hit an account-level compliance wall on
-  demo day: +1 calls from non-US accounts created after Oct 2025 require an
-  approved *Business* Trust Hub profile (error 21216). The negotiations
-  therefore run agent-vs-agent through the ElevenLabs simulation API with the
-  same prompts, dynamic variables, and transcript pipeline. Movement numbers
-  measure the Caller against *scripted persona concession rules*, not real
-  movers.
+- **The counterparties are simulated — deliberately, and disclosed.**
+  Measuring *leverage attribution* requires counterparties with known,
+  controlled concession rules: each persona (aggressive / evasive / honest)
+  has explicit rules about when it may concede, so a price drop after a
+  leverage line is interpretable and every run is reproducible. Against real
+  movers you get one uncontrolled sample per phone call. Real telephony was
+  built end to end (Twilio number import, outbound-call endpoint, live
+  webhook quote-logging — all verified) but is blocked on my account by a
+  Twilio compliance rule: +1 calls from non-US accounts created after
+  Oct 2025 require an approved Business Trust Hub profile (error 21216).
+  Movement numbers therefore measure the Caller against scripted persona
+  concession rules, not real movers.
 - **Single vertical** (moving), single seed job spec, three personas.
 - **Small n.** Three calls is evidence of mechanism, not a statistical claim.
 - The AI-disclosure honesty check passed vacuously in the frozen set (no
   persona asked); the aggressive persona now always asks, but the frozen
   golden calls predate that change.
+- See [KNOWN_ISSUES.md](KNOWN_ISSUES.md).
 
 ## Rules the agent cannot break
 
-- Identical job description on every call; if asked whether it's an AI, it
-  says yes immediately; it never invents bids, inventory, or constraints;
-  every call ends with an itemised quote, a committed callback, or a
-  documented decline; quotes 30%+ below market are flagged, not chased.
+Identical job description on every call; if asked whether it's an AI, it says
+yes immediately; it never invents bids, inventory, or constraints; every call
+ends with an itemised quote, a committed callback, or a documented decline;
+quotes 30%+ below market are flagged as lowballs, not chased.
 
-Team: Matthew Huang · Shehab (AreedAdmin) — MIT licensed.
+MIT licensed.
