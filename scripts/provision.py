@@ -97,6 +97,83 @@ def provision_agents(base_url: str) -> None:
     print(f"ELEVENLABS_COUNTER_HONEST_AGENT_ID={honest_id}")
 
 
+def provision_estimator(base_url: str) -> None:
+    # save_job_spec posts the confirmed spec to /jobspec; body mirrors
+    # schema/job_spec.schema.json (job_id assigned server-side).
+    # ElevenLabs requires every leaf property to carry a description
+    place = {"type": "object",
+             "required": ["postcode", "property_type", "floor", "elevator"],
+             "properties": {
+                 "postcode": {"type": "string", "description": "UK postcode"},
+                 "property_type": {"type": "string", "description": "size/type of property",
+                                   "enum": ["studio", "1bed", "2bed", "3bed", "4bed_plus", "office"]},
+                 "floor": {"type": "integer", "description": "0 = ground floor"},
+                 "elevator": {"type": "boolean", "description": "is there a lift"},
+                 "parking_distance_m": {"type": "integer",
+                                        "description": "walk from truck to door, metres"},
+             }}
+    tool_id = create_tool({
+        "type": "webhook",
+        "name": "save_job_spec",
+        "description": ("Save the completed moving job specification. Call ONLY after "
+                        "reading the full summary back and the caller explicitly confirms."),
+        "response_timeout_secs": 15,
+        "api_schema": {
+            "url": f"{base_url}/jobspec",
+            "method": "POST",
+            "request_body_schema": {
+                "type": "object",
+                "required": ["vertical", "origin", "destination", "move_date",
+                             "inventory", "access", "confirmed_by_user"],
+                "properties": {
+                    "vertical": {"type": "string", "description": "always 'moving'"},
+                    "origin": place,
+                    "destination": place,
+                    "move_date": {"type": "string", "description": "YYYY-MM-DD"},
+                    "date_flexible": {"type": "boolean",
+                                      "description": "true if the caller can shift the date"},
+                    "distance_miles": {"type": "number",
+                                       "description": "approx driving distance in miles"},
+                    "inventory": {"type": "array", "description": "every item group to move",
+                                  "items": {"type": "object",
+                                            "required": ["item", "qty"],
+                                            "properties": {
+                                                "item": {"type": "string", "description": "item name"},
+                                                "qty": {"type": "integer", "description": "count"},
+                                                "special": {"type": "string",
+                                                            "description": "piano / artwork / fragile / disassembly-needed"},
+                                            }}},
+                    "services_needed": {"type": "array", "description": "extra services requested",
+                                        "items": {"type": "string", "description": "service name",
+                                                  "enum": ["packing", "unpacking", "disassembly",
+                                                           "storage", "insurance"]}},
+                    "access": {"type": "object",
+                               "properties": {"notes": {"type": "string",
+                                                        "description": "access constraints in plain words"}}},
+                    "confirmed_by_user": {"type": "boolean",
+                                          "description": "true ONLY after explicit verbal confirmation"},
+                },
+            },
+        },
+    })
+    print(f"save_job_spec tool: {tool_id}  (webhook -> {base_url}/jobspec)")
+
+    prompt = (ROOT / "prompts" / "estimator_agent.md").read_text()
+    agent_id = create_agent("Negotiator — Estimator (intake)", {
+        "agent": {
+            "first_message": ("Hi, thanks for calling! I'm the moving estimator — "
+                              "I'll put together the exact spec we'll use to get you "
+                              "competitive quotes. First off: what's the postcode "
+                              "you're moving FROM?"),
+            "language": "en",
+            "prompt": {"prompt": prompt, "llm": LLM, "tool_ids": [tool_id]},
+        },
+    })
+    print(f"Estimator agent: {agent_id}")
+    print("\nAdd to .env:")
+    print(f"ELEVENLABS_ESTIMATOR_AGENT_ID={agent_id}")
+
+
 def provision_phone(number: str, label: str, assign_honest: bool) -> None:
     agent_id = os.getenv("ELEVENLABS_COUNTER_HONEST_AGENT_ID") if assign_honest else None
     if assign_honest and not agent_id:
@@ -129,6 +206,7 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     sub = ap.add_subparsers(dest="cmd", required=True)
     sub.add_parser("agents")
+    sub.add_parser("estimator")
     p = sub.add_parser("phone")
     p.add_argument("--number", required=True, help="E.164, e.g. +447700900123")
     p.add_argument("--label", required=True)
@@ -138,11 +216,11 @@ if __name__ == "__main__":
     args = ap.parse_args()
 
     base_url = os.getenv("BASE_URL", "http://localhost:8000").rstrip("/")
-    if args.cmd == "agents":
+    if args.cmd in ("agents", "estimator"):
         if "localhost" in base_url or "127.0.0.1" in base_url:
             sys.exit(f"BASE_URL is {base_url} — ElevenLabs can't reach localhost. "
                      "Start the tunnel first and set BASE_URL to the public URL.")
-        provision_agents(base_url)
+        provision_agents(base_url) if args.cmd == "agents" else provision_estimator(base_url)
     elif args.cmd == "phone":
         provision_phone(args.number, args.label, args.assign_honest)
     else:
