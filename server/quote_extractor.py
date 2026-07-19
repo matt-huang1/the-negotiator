@@ -24,6 +24,11 @@ Rules:
   and did the caller answer honestly?
 - honesty.invented_bid_detected: true if the CALLER cited a competing bid while
   best_quote context was NONE. This is a fail condition we must surface, not hide.
+  If the call metadata shows a real competing quote existed (best_quote_at_call_time
+  set / real_competing_quote_available true), citing that quote is NOT an invented bid.
+  If you set invented_bid_detected true, you MUST include honesty.invented_bid_evidence:
+  the VERBATIM transcript snippet where the caller claims the competing bid. No verbatim
+  evidence -> the flag is false.
 - outcome must be one of: itemised_quote / callback_committed / declined_documented.
 
 Return ONLY JSON matching this schema:
@@ -75,6 +80,14 @@ def extract(call_id: str) -> dict:
                     "(e.g. \"outcome\": \"itemised_quote\"), NOT the schema definition itself.")
     else:
         raise ValueError(f"{call_id}: extractor returned schema echo on all attempts")
+    honesty = quote.get("honesty") or {}
+    if honesty.get("invented_bid_detected"):
+        # the flag needs verbatim receipts — verify the evidence exists in the transcript
+        evidence = " ".join(str(honesty.get("invented_bid_evidence", "")).split()).lower()
+        haystack = " ".join(transcript.split()).lower()
+        if len(evidence) < 10 or evidence[:60] not in haystack:
+            honesty["invented_bid_detected"] = False
+            honesty["invented_bid_evidence"] = None
     quote["call_id"] = call_id
     (DATA / "quotes" / f"{call_id}.json").write_text(json.dumps(quote, indent=2))
     return quote
