@@ -60,7 +60,11 @@ def simulate(job_id: str, persona: str, turns: int) -> str:
     }
     (DATA / "calls" / f"{call_id}.json").write_text(json.dumps(
         {"call_id": call_id, "job_id": job_id, "persona": persona, "mode": "simulation",
-         "started_at": time.time(), "best_quote_at_call_time": best, "price_events": []}, indent=2))
+         "started_at": time.time(), "best_quote_at_call_time": best,
+         # explicit signal for the extractor's invented-bid check: citing a
+         # competing quote on this call was legitimate iff this is true
+         "real_competing_quote_available": bool(best),
+         "price_events": []}, indent=2))
 
     agent_id = os.environ["ELEVENLABS_CALLER_AGENT_ID"]
     r = httpx.post(f"{BASE}/agents/{agent_id}/simulate-conversation", headers=_headers(),

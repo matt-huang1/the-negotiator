@@ -12,8 +12,15 @@ Format: `- [ ] (A→B or B→A) file — what's needed and why`
   worth hardening before demo day.
 - [ ] (A→B, FYI — already done, code-only, prompt untouched) server/quote_extractor.py —
   gpt-4o echoed the schema shell with values nested in "properties" and hallucinated
-  filler fields. Added response_format=json_object, temperature=0, and an unwrap
-  guard. Please eyeball extraction quality on the next run.
+  filler fields. Added response_format=json_object, temperature=0, an unwrap
+  guard, and a validate+retry loop. Please eyeball extraction quality on the next run.
+- [ ] (A→B) PROMPT in server/quote_extractor.py — invented_bid_detected FALSE POSITIVE,
+  reproducible at temp 0: evasive call 05727657-evasive-a9fa cited the real £1,550
+  binding Priya quote (metadata has best_quote_at_call_time + explicit
+  real_competing_quote_available: true) yet gpt-4o flags invented_bid_detected.
+  This makes the demo scoreboard show "no invented bids: False", which is wrong and
+  demo-harmful. Suggest one prompt line: citing the quote in best_quote_at_call_time
+  is never an invented bid. Prompt is yours — flagging, not touching.
 - [ ] (A→B, FYI — already done by agreement w/ Matthew) server/quote_extractor.py —
   switched Anthropic→OpenAI gpt-4o (team has $50 OpenAI credits, no Anthropic key).
   Prompt and output format unchanged; please sanity-check extraction quality on the
