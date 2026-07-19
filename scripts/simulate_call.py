@@ -22,6 +22,8 @@ from server.elevenlabs_client import BASE, _headers
 load_dotenv()
 ROOT = Path(__file__).parent.parent
 DATA = Path(os.getenv("DATA_DIR", "./data"))
+for _sub in ("specs", "calls", "quotes", "transcripts"):
+    (DATA / _sub).mkdir(parents=True, exist_ok=True)
 
 PERSONA_FILES = {"aggressive": "aggressive_mover.md", "evasive": "evasive_mover.md",
                  "honest": "honest_mover.md"}
